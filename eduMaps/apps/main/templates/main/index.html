@@ -1,0 +1,167 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{{ title }}
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="anonymous" />
+<!--<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />-->
+<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/home1.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/nicepage.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+            <div class="filters">
+
+                <div class="search-box">
+                <input type="text" placeholder="Поиск" id="search-input">
+                <img src="{% static 'main/img/search-icon.png' %}" class="search-icon" alt="Иконка поиска"
+                    style="margin: 2px 2px 2px 2px;">
+            </div>
+                    <div class="filter-list">
+                        <div> 
+                            <button disabled="true" onclick="toggleList(this)" class="select-button schools-btn">Школы</button>
+                            <button active="true" onclick="toggleList(this)" class="select-button other-btn">Поступление</button>
+                        </div>
+                        <br>
+                        <div class="elements-list"></div>
+                    </div>
+            </div>
+
+            <div class="map-container">
+
+                <form>
+                    {% csrf_token %}
+                    <div id="map" style="height: 87vh;"></div>
+                </form>
+            </div>
+
+            <div class="content-container">
+                  <section class="u-clearfix u-section-2" id="sec-704c">
+                    <div class="u-expanded-height u-grey-60 u-shape u-shape-rectangle u-shape-1"></div>
+                    <div class="u-align-left-sm u-container-style u-group u-group-1">
+                      <div class="u-container-layout u-valign-middle-sm u-valign-middle-xs">
+                        <h2 class="u-custom-font u-font-oswald u-text u-text-body-alt-color u-text-1">Приимущество обучения в ЧГУ им А. А. Кадырова</h2>
+                        <div class="u-border-2 u-border-white u-line u-line-horizontal u-line-1"></div>
+                        <p class="u-text u-text-body-alt-color u-text-2">&nbsp; &nbsp; &nbsp; Преимуществом обучения в ЧГУ является большой педагогический состав многие из которых обучались за границей, обширные методы преподавания и возможности&nbsp; самовыражения и помощь в трудоустройстве будущим специалистам.</p>
+                      </div>
+                    </div>
+                    <img src="{% static 'main/img/chguOne.jpg' %}" alt="" class="u-expanded-width-xs u-image u-image-default u-image-1" data-image-width="2048" data-image-height="1365">
+                  </section>
+                  <section class="u-clearfix u-section-3" id="sec-c3a7">
+                    <div class="u-clearfix u-sheet u-sheet-1">
+                      <img src="{% static 'main/img/IMG_2870.jpg' %}" alt="" class="u-align-left u-image u-image-default u-image-1" data-image-width="800" data-image-height="533">
+                      <img src="{% static 'main/img/6383cf01bfe5c201844171.jpg' %}" alt="" class="u-align-left u-image u-image-default u-image-2" data-image-width="1300" data-image-height="866">
+                      <div class="u-align-left u-container-style u-expanded-width-md u-expanded-width-sm u-group u-left-0 u-group-1">
+                        <div class="u-container-layout u-valign-middle-sm u-container-layout-1">
+                          <h2 class="u-custom-font u-heading-font u-text u-text-1">начало и наши дни<br>
+                          </h2>
+                          <div class="u-border-3 u-border-grey-dark-1 u-line u-line-horizontal u-line-1"></div>
+                          <p class="u-align-left-xs u-text u-text-2">&nbsp; За последние 6 лет ЧГУ развилось до удивительных масштабов, построили дополнительные корпуса, открылись новые факультеты, институты и лицей</p>
+                        </div>
+                      </div>
+                      <div class="u-border-20 u-border-grey-60 u-line u-line-horizontal u-line-2"></div>
+                    </div>
+                  </section>
+                  <section class="u-clearfix u-section-4" id="sec-fbb0">
+                    <div class="data-layout-selected u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+                      <div class="u-layout" style="">
+                        <div class="u-layout-row" style="">
+                          <div class="u-container-style u-image u-layout-cell u-right-cell u-size-30 u-image-1">
+                            <div class="u-container-layout"></div>
+                          </div>
+                          <div class="u-container-style u-grey-60 u-layout-cell u-left-cell u-size-30 u-layout-cell-2">
+                            <div class="u-container-layout">
+                              <div class="u-align-left-xs u-container-style u-group u-group-1">
+                                <div class="u-container-layout u-valign-middle-xs">
+                                  <h2 class="u-text u-text-body-alt-color u-text-1">Информация об образовании</h2>
+                                  <p class="u-text u-text-body-alt-color u-text-2">&nbsp; &nbsp;Всего – 1276 человек из них профессорско-преподавательский состав – 740&nbsp;человек<br>научные работники – 18 человек и т.д.&nbsp;<br>Институты:<br>&nbsp; &nbsp; 1.&nbsp;Институт экономики и финансов <br>&nbsp; &nbsp; 2.&nbsp;Институт физики, математики и информационных технологий <br>&nbsp; &nbsp; 3.&nbsp;Медицинский институт <br>&nbsp; &nbsp; 4.&nbsp;Агротехнологический институт <br>&nbsp; &nbsp; 5. Институт дополнительного профессионального образования<br>Колледжи:<br>&nbsp; &nbsp; &nbsp;Колледж <br>&nbsp; &nbsp; &nbsp;Медицинский колледж при медицинском институте&nbsp;<br>Лицей&nbsp;&nbsp;<br>
+                                    <br>Бакалавриат, специалитет, магистратура <br>Всего – 12 516 <br>Из них: <br>&nbsp; &nbsp;Очная форма обучения – 6 246; <br>&nbsp; &nbsp;Очно-заочная форма обучения – 2 050; <br>&nbsp; &nbsp;Заочная форма обучения – 4 220.<br>
+                                    <br>Аспирантура <br>Всего – 81 <br>Из них: <br>&nbsp; &nbsp;очная форма обучения – 14 <br>&nbsp; &nbsp;заочная форма обучения – 67 <br>
+                                    <br>Ординатура <br>Всего – 48 <br>Из них: <br>&nbsp; &nbsp; очная форма обучения – 48 <br>&nbsp;<br>
+                                  </p>
+                                  <div class="u-border-2 u-border-white u-line u-line-horizontal u-line-1"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section class="u-clearfix u-image u-section-5" data-image-width="1024" data-image-height="682" id="sec-48ac">
+                    <div class="u-clearfix u-sheet u-valign-bottom u-sheet-1">
+                      <div class="u-align-left u-container-style u-expanded-width-sm u-group u-group-1">
+                        <div class="u-container-layout u-container-layout-1">
+                          <h2 class="u-text u-text-white u-text-1">Студенческая жизнь</h2>
+                          <p class="u-text u-text-body-alt-color u-text-2">Студены в свободное от занятий время могу участвовать в различных мероприятий как сезонных так и повседневные, участвовать в различный соревновательных отраслях и выдвигать свои проекты на гранты.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section class="u-clearfix u-white u-section-6" id="sec-09cd">
+                    <div class="data-layout-selected u-clearfix u-expanded-width u-gutter-16 u-layout-spacing-all u-layout-wrap u-layout-wrap-1">
+                      <div class="u-layout">
+                        <div class="u-layout-row">
+                          <div class="u-align-left u-container-style u-image u-layout-cell u-left-cell u-size-20 u-size-20-md u-image-1" data-image-width="1300" data-image-height="866">
+                            <div class="u-container-layout">
+                              <h5 class="u-custom-font u-heading-font u-text u-text-body-alt-color u-text-1">виртуальная экскурсия по главному корпусу</h5>
+                              <div class="u-border-1 u-border-white u-line u-line-horizontal u-line-1"></div>
+                              <a href="https://www.google.com/maps/search/?api=1&amp;query=Massachusetts%20Institute%20of%20Technology%20(MIT)%2077%20Massachusetts%20Avenue%20%20Cambridge" class="u-border-1 u-border-palette-1-base u-link u-no-underline u-text-body-alt-color u-link-1" target="_blank">view map</a><span class="u-icon u-icon-circle u-text-grey-40 u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 512 512" style="undefined"><use xlink:href="#svg-5570"></use></svg><svg class="u-svg-content" viewBox="0 0 512 512" x="0px" y="0px" id="svg-5570" style="enable-background:new 0 0 512 512;"></svg>><g><g><path d="M256,0C153.755,0,70.573,83.182,70.573,185.426c0,126.888,165.939,313.167,173.004,321.035    c6.636,7.391,18.222,7.378,24.846,0c7.065-7.868,173.004-194.147,173.004-321.035C441.425,83.182,358.244,0,256,0z M256,278.719    c-51.442,0-93.292-41.851-93.292-93.293S204.559,92.134,256,92.134s93.291,41.851,93.291,93.293S307.441,278.719,256,278.719z"></path>
+                  </g>
+                  </g></svg></span>
+                            </div>
+                          </div>
+                          <div class="u-align-left u-container-style u-image u-layout-cell u-size-20 u-size-20-md u-image-2" data-image-width="600" data-image-height="600">
+                            <div class="u-container-layout">
+                              <h5 class="u-custom-font u-heading-font u-text u-text-body-alt-color u-text-2"> виртуальная экскурсия по 3-й корпусу</h5>
+                              <div class="u-border-1 u-border-white u-line u-line-horizontal u-line-2"></div>
+                              <a href="https://www.google.com/maps/search/?api=1&amp;query=Stanford%20University%20450%20Serra%20Mall%20%20Stanford" class="u-border-1 u-border-palette-1-base u-link u-no-underline u-text-body-alt-color u-link-2" target="_blank">view map</a><span class="u-icon u-icon-circle u-text-grey-40 u-icon-2"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 512 512" style="undefined"><use xlink:href="#svg-f352"></use></svg><svg class="u-svg-content" viewBox="0 0 512 512" x="0px" y="0px" id="svg-f352" style="enable-background:new 0 0 512 512;"><g><g><path d="M256,0C153.755,0,70.573,83.182,70.573,185.426c0,126.888,165.939,313.167,173.004,321.035    c6.636,7.391,18.222,7.378,24.846,0c7.065-7.868,173.004-194.147,173.004-321.035C441.425,83.182,358.244,0,256,0z M256,278.719    c-51.442,0-93.292-41.851-93.292-93.293S204.559,92.134,256,92.134s93.291,41.851,93.291,93.293S307.441,278.719,256,278.719z"></path>
+                  </g>
+                  </g></svg></span>
+                            </div>
+                          </div>
+                          <div class="u-align-left u-container-style u-image u-layout-cell u-right-cell u-size-20 u-size-20-md u-image-3" data-image-width="1280" data-image-height="853">
+                            <div class="u-container-layout">
+                              <h5 class="u-custom-font u-heading-font u-text u-text-body-alt-color u-text-3">виртуальная экскурсия по карбоновому полигону</h5>
+                              <div class="u-border-1 u-border-white u-line u-line-horizontal u-line-3"></div>
+                              <a href="https://www.google.com/maps/search/?api=1&amp;query=Harvard%20University%2011%20Divinity%20Avenue%20%20Cambridge" class="u-border-1 u-border-palette-1-base u-link u-no-underline u-text-body-alt-color u-link-3" target="_blank">view map</a><span class="u-icon u-icon-circle u-text-grey-40 u-icon-3"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 512 512" style="undefined"><use xlink:href="#svg-d6fe"></use></svg><svg class="u-svg-content" viewBox="0 0 512 512" x="0px" y="0px" id="svg-d6fe" style="enable-background:new 0 0 512 512;"><g><g><path d="M256,0C153.755,0,70.573,83.182,70.573,185.426c0,126.888,165.939,313.167,173.004,321.035    c6.636,7.391,18.222,7.378,24.846,0c7.065-7.868,173.004-194.147,173.004-321.035C441.425,83.182,358.244,0,256,0z M256,278.719    c-51.442,0-93.292-41.851-93.292-93.293S204.559,92.134,256,92.134s93.291,41.851,93.291,93.293S307.441,278.719,256,278.719z"></path>
+                  </g>
+                  </g></svg></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+            </div>
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'main/js/education.js' %}"></script>
+<!--<script>-->
+<!--    let educations = [-->
+<!--    {% for edu in educations %}-->
+<!--    new Education({{ edu.id }}, "{{ edu.title }}", "{{ edu.description }}",  "{{ edu.web_site_url }}",  "{{ edu.contacts }}",  "{{ edu.address }}", "{{ edu.director_name }}",  "{{ edu.location }}",  "{{ edu.region }}"),-->
+<!--    {% endfor %}-->
+<!--  ]-->
+<!--</script>-->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="{% static 'main/js/script.js' %}"></script>
+<script src="{% static 'main/js/change_filter.js' %}"></script>
+<script src="{% static 'main/js/contents.js' %}"></script>
+<script src="{% static 'main/js/form_control.js' %}"></script>
+<script src="{% static 'main/js/script_site.js' %}"></script>
+<script src="{% static 'main/js/regions_load.js' %}"></script>
+<script src="{% static 'main/js/search.js' %}"></script>
+{% endblock %}
