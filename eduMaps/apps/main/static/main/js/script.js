@@ -107,12 +107,12 @@ const setMarkerContent = (edu) => {
 
     let content = `
         <div class="popup-content" style="display: flex;">
-            <div class="popup-images-container" style="flex: auto; margin: 5px;">
+            <div class="popup-images-container" style="flex: auto; margin: 5px;align-self: center;">
                 ${imageOneUrl}
                 ${imageTwoUrl}
                 ${imageThreeUrl}
             </div>
-
+            <div style="width:10px;align-self: stretch;background-color: #2196f3;"></div>
             <div class="text-left" style="flex: auto; margin: 10px;">
                 <h3>${edu.fields.title}</h3>
                 ${desc}
